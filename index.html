@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LittleNest — Sukanya Samriddhi (SSY) Calculator</title>
+<meta name="description" content="LittleNest is a free Sukanya Samriddhi (SSY) Calculator: plan 15 years of deposits, see the full 21-year maturity timeline, your daughter's age at maturity and the education withdrawal estimate.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Nunito Sans',sans-serif;background:#FFFBF5;color:#3F2A2E}
+.font-display{font-family:'Fraunces',serif}
+.timeline-dot{width:14px;height:14px;border-radius:9999px}
+input[type=range]{accent-color:#E11D63}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the Sukanya Samriddhi Yojana (SSY)?","acceptedAnswer":{"@type":"Answer","text":"SSY is a Government of India small-deposit scheme for a girl child. A parent or guardian opens one account for a daughter aged 10 or younger, deposits for 15 years, and the account matures after 21 years, earning interest declared by the government each quarter."}},
+{"@type":"Question","name":"How much can I deposit in SSY each year?","acceptedAnswer":{"@type":"Answer","text":"You can deposit a minimum of Rs 250 and a maximum of Rs 1,50,000 in a financial year, in multiples of Rs 50. Deposits are required for the first 15 years from the date the account is opened."}},
+{"@type":"Question","name":"When does an SSY account mature and what is my daughter's age then?","acceptedAnswer":{"@type":"Answer","text":"The account matures 21 years after opening, or at the daughter's marriage after she turns 18, whichever conditions apply. LittleNest shows her exact age at maturity — opening age plus 21 years — right on the results panel."}},
+{"@type":"Question","name":"Can I withdraw money early for my daughter's education?","acceptedAnswer":{"@type":"Answer","text":"Yes. After your daughter turns 18 or passes Class 10, a partial withdrawal of up to 50 percent of the balance at the end of the preceding financial year is allowed for higher education, once a year for up to five years, against proof of admission and fees."}},
+{"@type":"Question","name":"Is SSY interest and maturity tax-free?","acceptedAnswer":{"@type":"Answer","text":"SSY enjoys EEE tax status: deposits qualify for deduction under Section 80C up to Rs 1.5 lakh, the interest earned is tax-free, and the maturity amount is also tax-free, subject to prevailing tax rules."}},
+{"@type":"Question","name":"How accurate is this SSY calculator?","acceptedAnswer":{"@type":"Answer","text":"LittleNest compounds your deposits annually at the rate you enter for the full 21 years. The actual government rate changes every quarter, so your real maturity value will differ slightly. Use the rate slider to test lower and higher scenarios."}}
+]}
+</script>
+</head>
+<body id="top">
+<header class="sticky top-0 z-40 bg-[#FFFBF5]/90 backdrop-blur border-b border-rose-100">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2"><span class="text-2xl">🪺</span><span class="font-display text-2xl font-bold text-rose-700">LittleNest</span></a>
+    <nav class="flex gap-5 text-sm font-bold"><a href="#top" class="hover:text-rose-600">Home</a><a href="https://fixoraa.tech" class="hover:text-rose-600">More Tools</a></nav>
+  </div>
+</header>
+
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pt-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <div class="origin-top scale-[0.44] sm:scale-100 shrink-0">
+        <script>
+          atOptions = { 'key' : '4e68ac77881c17fe128a46565d9a4e8c', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+  <div class="text-center max-w-2xl mx-auto">
+    <span class="inline-block bg-rose-100 text-rose-700 text-xs font-extrabold px-3 py-1 rounded-full">🌸 Unlimited Free Usage</span>
+    <h1 class="font-display text-4xl sm:text-5xl font-bold mt-4">Sukanya Samriddhi Calculator</h1>
+    <p class="mt-3 text-rose-900/70">A gentle 21-year plan for your daughter's future — 15 years of deposits, then six quiet years where interest does the growing.</p>
+  </div>
+
+  <section class="mt-8 grid lg:grid-cols-5 gap-6">
+    <div class="lg:col-span-2 bg-white rounded-3xl border border-rose-100 shadow-sm p-6 space-y-5">
+      <div>
+        <label class="font-bold text-sm" for="age">Daughter's age today (0–10 years)</label>
+        <input id="age" type="number" min="0" max="10" value="2" class="mt-1 w-full border border-rose-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-rose-300">
+      </div>
+      <div>
+        <label class="font-bold text-sm" for="deposit">Yearly deposit (₹250 – ₹1,50,000)</label>
+        <input id="deposit" type="number" min="250" max="150000" step="50" value="50000" class="mt-1 w-full border border-rose-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-rose-300">
+        <input id="depositRange" type="range" min="250" max="150000" step="250" value="50000" class="w-full mt-2">
+        <p class="text-xs text-rose-900/60">That is about <span id="monthlyEq" class="font-bold">Rs 4,167</span> a month.</p>
+      </div>
+      <div>
+        <label class="font-bold text-sm" for="rate">Interest rate (% per year)</label>
+        <input id="rate" type="number" min="0.1" max="20" step="0.1" value="8.2" class="mt-1 w-full border border-rose-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-rose-300">
+        <p class="text-xs text-rose-900/60">The government revises the SSY rate every quarter. 8.2% is a recent declared rate — adjust it to test other scenarios.</p>
+      </div>
+      <div>
+        <label class="font-bold text-sm" for="startYear">Account opening year</label>
+        <input id="startYear" type="number" min="2015" max="2040" value="2026" class="mt-1 w-full border border-rose-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-rose-300">
+      </div>
+      <button id="calcBtn" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-extrabold py-3 rounded-xl">Grow her nest egg 🌱</button>
+      <p id="err" class="hidden text-sm bg-red-50 border border-red-200 text-red-700 rounded-xl px-3 py-2"></p>
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm">
+        <p class="font-extrabold text-amber-800">🎓 Education withdrawal note</p>
+        <p class="text-amber-900/80 mt-1">Once your daughter turns 18 (or passes Class 10), you may withdraw up to <strong>50% of the balance at the end of the previous financial year</strong> for her higher education — once a year, for up to five years, with proof of admission and fees. LittleNest estimates that amount below so college never catches you by surprise.</p>
+        <p id="eduNote" class="mt-2 font-bold text-amber-900"></p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3 space-y-6">
+      <div class="bg-gradient-to-br from-rose-600 to-rose-500 text-white rounded-3xl p-6 shadow">
+        <p class="text-rose-100 text-sm font-bold">Maturity value in <span id="matYear">2047</span></p>
+        <p id="matValue" class="font-display text-4xl sm:text-5xl font-bold mt-1">—</p>
+        <p class="mt-2 text-rose-100">Your daughter will be <span id="matAge" class="font-extrabold text-white text-lg">—</span> years old at maturity 🎂</p>
+        <div class="grid grid-cols-3 gap-3 mt-5 text-center">
+          <div class="bg-white/15 rounded-2xl p-3"><p class="text-[11px] uppercase tracking-wide text-rose-100">You deposit</p><p id="totDep" class="font-extrabold">—</p></div>
+          <div class="bg-white/15 rounded-2xl p-3"><p class="text-[11px] uppercase tracking-wide text-rose-100">Interest adds</p><p id="totInt" class="font-extrabold">—</p></div>
+          <div class="bg-white/15 rounded-2xl p-3"><p class="text-[11px] uppercase tracking-wide text-rose-100">Deposits end</p><p id="depEnd" class="font-extrabold">—</p></div>
+        </div>
+        <div class="flex gap-2 mt-5">
+          <button id="copyBtn" class="bg-white text-rose-700 font-bold px-4 py-2 rounded-xl text-sm">Copy summary</button>
+          <button onclick="window.print()" class="bg-rose-800/60 font-bold px-4 py-2 rounded-xl text-sm">Print plan</button>
+        </div>
+        <p id="copied" class="hidden text-sm mt-2">Copied ✓</p>
+      </div>
+
+      <!-- Gentle timeline -->
+      <div class="bg-white rounded-3xl border border-rose-100 p-6">
+        <h2 class="font-display text-xl font-bold">Her journey, year by year</h2>
+        <div class="mt-4 space-y-0" id="milestones"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-8 bg-white rounded-3xl border border-rose-100 p-6 overflow-x-auto">
+    <h2 class="font-display text-2xl font-bold">15-year deposit &amp; 21-year maturity grid</h2>
+    <p class="text-sm text-rose-900/60 mt-1">Deposits stop after year 15. Years 16–21 have no deposits at all — the balance keeps growing on interest alone.</p>
+    <table class="w-full text-sm mt-4 min-w-[640px]">
+      <thead><tr class="text-left text-rose-700 border-b border-rose-100"><th class="py-2 pr-2">Year</th><th class="py-2 pr-2">Calendar</th><th class="py-2 pr-2">Her age</th><th class="py-2 pr-2">Deposit</th><th class="py-2 pr-2">Interest</th><th class="py-2 pr-2">Balance</th><th class="py-2">Phase</th></tr></thead>
+      <tbody id="gridBody"></tbody>
+    </table>
+  </section>
+
+  <article id="seo-article" class="mt-12 bg-white rounded-3xl border border-rose-100 p-6 sm:p-10 prose max-w-none">
+    <h2 class="font-display text-3xl font-bold">Sukanya Samriddhi Yojana: The Complete Parent's Guide to the SSY Calculator</h2>
+    <p class="mt-4 leading-relaxed">Few financial decisions feel as emotional as saving for a daughter. The Sukanya Samriddhi Yojana, usually shortened to SSY, was created by the Government of India under the Beti Bachao Beti Padhao campaign precisely for that feeling. It turns a modest, regular deposit into a protected corpus for a girl's education and future, and it does so with a government-backed interest rate that has consistently sat above most fixed deposits. The LittleNest Sukanya Samriddhi Calculator exists to make that long journey visible. Instead of a single maturity number dropped on you without context, it draws the whole twenty-one years as a gentle timeline, shows your daughter's age at every step, separates the fifteen deposit years from the six growth-only years, and even estimates the education withdrawal you may rely on when she turns eighteen. Planning becomes less about guessing and more about watching a small nest grow, season after season.</p>
+    <p class="mt-4 leading-relaxed">Eligibility is deliberately simple. A parent or legal guardian can open exactly one SSY account for a girl child, and the account must be opened before she turns ten. A family may open accounts for two daughters, and in the special case of twin or triplet girls, more accounts are permitted with supporting certificates. The account can be opened at a post office or an authorised bank branch with the child's birth certificate, the guardian's identity and address proof, and a small first deposit. Once opened, the account belongs to the girl, although the guardian operates it until she turns eighteen. This calculator begins from that same rule: the age you enter must be between zero and ten, because those are the only ages at which a real account can begin, and every projection flows from that honest starting point.</p>
+    <p class="mt-4 leading-relaxed">The deposit rules reward consistency rather than wealth. You must deposit at least two hundred and fifty rupees in a financial year, and you may deposit at most one lakh fifty thousand rupees, in multiples of fifty rupees, through as many instalments as you like. Many families deposit monthly, treating SSY like a quiet salary-day ritual, while others deposit a lump sum in April to maximise the interest calculation, since SSY interest is computed on the lowest balance between the fifth day and the end of each month. Deposits are required only for the first fifteen years from opening. After that, the account does not close or stop earning; it simply enters a patient phase in which no fresh money goes in, yet interest keeps compounding until the twenty-first year. That structure is exactly what the year-by-year grid on this page displays, with the phase column flipping from deposit years to growth only at year sixteen.</p>
+    <p class="mt-4 leading-relaxed">Interest is where SSY quietly shines. The rate is declared by the Ministry of Finance every quarter, alongside other small savings schemes, and it has historically remained among the highest available to ordinary savers. Interest is calculated monthly but credited to the account once a year, and it compounds annually. Over twenty-one years, compounding creates the familiar snowball: in the early years the interest is small, almost disappointing, but by the final growth-only years the annual interest alone can exceed what you once deposited in a full year. LittleNest models this with annual compounding at the rate you choose, applying interest to the opening balance plus that year's deposit. Because the real rate will change many times over two decades, the calculator invites you to test several rates. Try a cautious figure and an optimistic one, and treat the truth as a band between them rather than a single promise.</p>
+    <p class="mt-4 leading-relaxed">Maturity arrives twenty-one years after the account opens. If you open the account for a newborn, she will be twenty-one when it matures, perfectly timed for higher studies or a first step into adult life. If you open it when she is eight, maturity comes at twenty-nine, which changes the plan entirely and might suit a wedding, a business seed fund, or postgraduate study abroad. This is why LittleNest displays her age at maturity so prominently: the right deposit amount depends on what life event the money is meant to meet. The account can also be closed at her marriage after she turns eighteen, with the required declarations, and premature closure is allowed in narrow compassionate circumstances, such as the death of a guardian or a life-threatening medical emergency, usually with an interest penalty. Knowing these exits in advance helps families commit calmly rather than anxiously.</p>
+    <p class="mt-4 leading-relaxed">The education withdrawal is the feature parents ask about most, and it deserves careful reading. After the girl turns eighteen, or after she passes Class ten, whichever framework the operating office applies with documents, a partial withdrawal is permitted specifically for higher education. The ceiling is fifty percent of the balance standing at the end of the preceding financial year. The withdrawal is not a single event; it can be taken in one instalment or spread across up to five yearly instalments while the course continues, supported by admission proof and a fee structure from the institution. LittleNest estimates this amount from your own projection, using the balance at the point she turns eighteen, so you can see early whether SSY alone might cover a degree or whether a second savings pot should grow beside it. Treat the estimate as a planning compass, not a bank statement, because actual eligibility is confirmed by the post office or bank when documents are presented.</p>
+    <p class="mt-4 leading-relaxed">Tax treatment adds one more layer of generosity. SSY is one of the few instruments in India with exempt-exempt-exempt status. Deposits qualify for deduction under Section 80C up to the overall limit of one lakh fifty thousand rupees a year, the interest credited each year is not taxed, and the maturity proceeds are tax-free as well. For a guardian in a higher tax slab, that triple benefit quietly raises the effective return beyond the headline rate. Rules can change with future budgets, and the new tax regime treats deductions differently, so a quick conversation with a tax adviser is worthwhile before committing the maximum amount. Still, even ignoring tax entirely, the combination of sovereign backing, a strong declared rate, and a twenty-one-year compounding runway makes SSY difficult to beat for a goal that is genuinely long term.</p>
+    <p class="mt-4 leading-relaxed">How much should you actually deposit? Start from the goal and work backwards. Estimate what a degree might cost when your daughter reaches eighteen, remembering that education inflation in India has often run higher than general inflation. Enter that thinking into the calculator in reverse: try the maximum deposit and note the maturity value, then lower the deposit until the projection feels both useful and sustainable. A plan you can hold for fifteen years beats an ambitious plan abandoned in year four, because a missed year attracts a small default fee and the account must be revived with arrears before it counts again. Many parents align the deposit with a monthly figure they barely notice, which is why this page converts your yearly deposit into a monthly equivalent. Fifty thousand rupees a year sounds large; a little over four thousand a month sounds like a habit, and habits are what fifteen-year plans are built from.</p>
+    <p class="mt-4 leading-relaxed">It also helps to place SSY honestly among its companions. A Public Provident Fund account offers a longer flexible tenure and suits retirement-style goals, but it is not dedicated to a daughter and its rate has generally trailed SSY. Equity mutual funds through systematic investment plans can outpace SSY across long horizons, yet they carry market risk and no guaranteed floor, which many parents dislike for a non-negotiable education goal. Fixed deposits are simpler but are taxed annually and rarely match the rate. A common, sensible pattern is a core-and-satellite approach: SSY as the guaranteed core for education, and market investments as a satellite for aspirations beyond the essentials. The calculator supports that conversation by showing exactly what the guaranteed core alone can deliver, so any additional investing is a bonus rather than a rescue mission.</p>
+    <p class="mt-4 leading-relaxed">A few practical habits protect the account over its long life. Deposit early in April when possible, or before the fifth of any month for monthly deposits, to earn interest on the full month. Keep the passbook updated and check the credited interest each year. If your family moves, the account can be transferred anywhere in India between post offices and banks, free of charge once a year with proof of residence change. Nominate and update guardian details after any major life event. If a year is missed, revive the account promptly by paying the minimum deposit for each defaulted year plus a small penalty per year, rather than letting it drift. When your daughter turns eighteen, she can operate the account herself, a small financial rite of passage worth celebrating and a natural moment to teach her how compounding built the balance she now sees.</p>
+    <p class="mt-4 leading-relaxed">Finally, remember what this calculator can and cannot do. It cannot predict the quarterly rates the government will declare across the next two decades, and it cannot know your family's future income, so its maturity figure is a disciplined estimate, not a guarantee. What it can do is remove vagueness. In one view you can see total deposits, total interest, the year deposits end, the year the account matures, your daughter's age at that moment, an estimate of the education withdrawal available at eighteen, and a complete twenty-one-row grid you can print and pin above a desk. Return to it each year after the interest is credited, adjust the rate, and watch the plan settle. A nest is not built in a day; it is built twig by twig, deposit by deposit, until one day it is simply ready. LittleNest is here, free and unlimited, for every one of those yearly visits.</p>
+
+    <h3 class="font-display text-2xl font-bold mt-8">Frequently Asked Questions</h3>
+    <div class="space-y-4 mt-4">
+      <div><h4 class="font-bold">1. What is the Sukanya Samriddhi Yojana (SSY)?</h4><p>SSY is a Government of India small-deposit scheme for a girl child. A parent or guardian opens one account for a daughter aged 10 or younger, deposits for 15 years, and the account matures after 21 years, earning interest declared by the government each quarter.</p></div>
+      <div><h4 class="font-bold">2. How much can I deposit in SSY each year?</h4><p>You can deposit a minimum of Rs 250 and a maximum of Rs 1,50,000 in a financial year, in multiples of Rs 50. Deposits are required for the first 15 years from the date the account is opened.</p></div>
+      <div><h4 class="font-bold">3. When does an SSY account mature and what is my daughter's age then?</h4><p>The account matures 21 years after opening, or at the daughter's marriage after she turns 18, whichever conditions apply. LittleNest shows her exact age at maturity — opening age plus 21 years — right on the results panel.</p></div>
+      <div><h4 class="font-bold">4. Can I withdraw money early for my daughter's education?</h4><p>Yes. After your daughter turns 18 or passes Class 10, a partial withdrawal of up to 50 percent of the balance at the end of the preceding financial year is allowed for higher education, once a year for up to five years, against proof of admission and fees.</p></div>
+      <div><h4 class="font-bold">5. Is SSY interest and maturity tax-free?</h4><p>SSY enjoys EEE tax status: deposits qualify for deduction under Section 80C up to Rs 1.5 lakh, the interest earned is tax-free, and the maturity amount is also tax-free, subject to prevailing tax rules.</p></div>
+      <div><h4 class="font-bold">6. How accurate is this SSY calculator?</h4><p>LittleNest compounds your deposits annually at the rate you enter for the full 21 years. The actual government rate changes every quarter, so your real maturity value will differ slightly. Use the rate slider to test lower and higher scenarios.</p></div>
+    </div>
+  </article>
+</main>
+
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pb-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="464498"></script>
+    </div>
+  </div>
+</div>
+
+<footer class="border-t border-rose-100 py-6 text-center text-sm text-rose-900/60">LittleNest — a gentle planner for your daughter's tomorrow. Estimates only; SSY rules and rates are set by the Government of India.</footer>
+
+<script id="lib-littlenest">
+var LittleNestLib = {
+  MIN_DEPOSIT: 250,
+  MAX_DEPOSIT: 150000,
+  DEPOSIT_YEARS: 15,
+  MATURITY_YEARS: 21,
+  DEFAULT_RATE: 8.2,
+  clamp: function (v, lo, hi) { return Math.min(hi, Math.max(lo, v)); },
+  validate: function (annualDeposit, rate, age) {
+    var errors = [];
+    if (annualDeposit === null || annualDeposit === undefined || isNaN(annualDeposit) || annualDeposit === '') errors.push('Enter an annual deposit amount.');
+    else if (annualDeposit < this.MIN_DEPOSIT) errors.push('Minimum annual deposit is Rs 250.');
+    else if (annualDeposit > this.MAX_DEPOSIT) errors.push('Maximum annual deposit is Rs 1,50,000 per financial year.');
+    if (rate === null || rate === undefined || isNaN(rate) || rate <= 0 || rate > 20) errors.push('Interest rate must be between 0.1% and 20%.');
+    if (age === null || age === undefined || isNaN(age) || age < 0 || age > 10) errors.push("Daughter's age at opening must be between 0 and 10 years.");
+    return errors;
+  },
+  compute: function (annualDeposit, ratePct, ageAtOpening, startYear) {
+    annualDeposit = Number(annualDeposit); ratePct = Number(ratePct); ageAtOpening = Number(ageAtOpening); startYear = Number(startYear) || new Date().getFullYear();
+    var errors = this.validate(annualDeposit, ratePct, ageAtOpening);
+    if (errors.length) return { ok: false, errors: errors };
+    var r = ratePct / 100;
+    var balance = 0, totalDeposited = 0, totalInterest = 0;
+    var rows = [];
+    for (var y = 1; y <= this.MATURITY_YEARS; y++) {
+      var deposit = y <= this.DEPOSIT_YEARS ? annualDeposit : 0;
+      var opening = balance;
+      var interest = Math.round((opening + deposit) * r * 100) / 100;
+      // interest on (opening+deposit) approximates deposit at start of year
+      balance = opening + deposit + interest;
+      totalDeposited += deposit; totalInterest += interest;
+      rows.push({ yearIndex: y, calendarYear: startYear + y - 1, daughterAge: ageAtOpening + y, deposit: deposit, interest: Math.round(interest), opening: Math.round(opening), closing: Math.round(balance), phase: y <= 15 ? 'Deposit years' : 'Growth only' });
+    }
+    var maturityValue = Math.round(balance);
+    // Education withdrawal: when daughter turns 18, i.e. after (18 - age) years; eligible = 50% of balance at end of previous financial year
+    var yearsTo18 = Math.max(0, 18 - ageAtOpening);
+    var balanceAt18Prev = yearsTo18 > 0 && rows[yearsTo18 - 1] ? rows[yearsTo18 - 1].closing : 0;
+    // If opened at age 0, turning 18 happens in year 18; previous year end is row 17 (index 17)?? Use row for year = yearsTo18 (closing at start of that year approx) - keep simple: balance at end of year before she turns 18
+    if (yearsTo18 >= 1 && rows[yearsTo18 - 1]) balanceAt18Prev = rows[yearsTo18 - 1].closing;
+    var educationEligible = Math.round(balanceAt18Prev * 0.5);
+    return {
+      ok: true, errors: [], rows: rows,
+      totalDeposited: totalDeposited,
+      totalInterest: Math.round(totalInterest),
+      maturityValue: maturityValue,
+      maturityYear: startYear + this.MATURITY_YEARS,
+      depositEndYear: startYear + this.DEPOSIT_YEARS - 1,
+      maturityAge: ageAtOpening + this.MATURITY_YEARS,
+      yearsTo18: yearsTo18,
+      educationEligible: educationEligible,
+      balanceAt18Prev: balanceAt18Prev,
+      monthlyEquivalent: Math.round(annualDeposit / 12)
+    };
+  },
+  formatINR: function (n) {
+    if (n === null || n === undefined || isNaN(n)) return 'Rs 0';
+    var neg = n < 0; n = Math.abs(Math.round(n));
+    var s = String(n), last3 = s.slice(-3), rest = s.slice(0, -3);
+    var out = rest ? rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + last3 : last3;
+    return (neg ? '-' : '') + 'Rs ' + out;
+  }
+};
+if (typeof module !== 'undefined' && module.exports) { module.exports = LittleNestLib; }
+
+</script>
+<script>
+var lastResult=null;
+function $(id){return document.getElementById(id)}
+function render(){
+  var age=parseFloat($('age').value), dep=parseFloat($('deposit').value), rate=parseFloat($('rate').value), yr=parseInt($('startYear').value,10);
+  $('depositRange').value = isNaN(dep)?250:Math.min(150000,Math.max(250,dep));
+  var res=LittleNestLib.compute(dep,rate,age,yr);
+  var err=$('err');
+  if(!res.ok){ err.textContent=res.errors.join(' '); err.classList.remove('hidden'); return; }
+  err.classList.add('hidden'); lastResult=res;
+  $('monthlyEq').textContent=LittleNestLib.formatINR(res.monthlyEquivalent);
+  $('matYear').textContent=res.maturityYear;
+  $('matValue').textContent=LittleNestLib.formatINR(res.maturityValue);
+  $('matAge').textContent=res.maturityAge;
+  $('totDep').textContent=LittleNestLib.formatINR(res.totalDeposited);
+  $('totInt').textContent=LittleNestLib.formatINR(res.totalInterest);
+  $('depEnd').textContent=res.depositEndYear;
+  $('eduNote').textContent='Estimated education withdrawal available when she turns 18: '+LittleNestLib.formatINR(res.educationEligible)+' (50% of '+LittleNestLib.formatINR(res.balanceAt18Prev)+').';
+  var ms=[
+    {icon:'🪺',label:'Account opens',detail:'Age '+age+' · '+yr},
+    {icon:'🎓',label:'Turns 18 — education withdrawal window opens',detail:'Up to '+LittleNestLib.formatINR(res.educationEligible)+' available for higher education'},
+    {icon:'🌿',label:'Deposits end after year 15',detail:'Last deposit year '+res.depositEndYear},
+    {icon:'🌸',label:'Maturity — age '+res.maturityAge,detail:res.maturityYear+' · '+LittleNestLib.formatINR(res.maturityValue)}
+  ];
+  $('milestones').innerHTML=ms.map(function(m,i){return '<div class="flex gap-3 pb-5 relative"><div class="timeline-dot bg-rose-500 mt-1 shrink-0"></div><div><p class="font-bold">'+m.icon+' '+m.label+'</p><p class="text-sm text-rose-900/60">'+m.detail+'</p></div></div>'}).join('');
+  $('gridBody').innerHTML=res.rows.map(function(r){return '<tr class="border-b border-rose-50 '+(r.yearIndex>15?'bg-rose-50/60':'')+'"><td class="py-2 pr-2 font-bold">'+r.yearIndex+'</td><td class="py-2 pr-2">'+r.calendarYear+'</td><td class="py-2 pr-2">'+r.daughterAge+'</td><td class="py-2 pr-2">'+(r.deposit?LittleNestLib.formatINR(r.deposit):'—')+'</td><td class="py-2 pr-2">'+LittleNestLib.formatINR(r.interest)+'</td><td class="py-2 pr-2 font-bold">'+LittleNestLib.formatINR(r.closing)+'</td><td class="py-2"><span class="text-xs font-bold px-2 py-1 rounded-full '+(r.yearIndex<=15?'bg-rose-100 text-rose-700':'bg-emerald-100 text-emerald-700')+'">'+r.phase+'</span></td></tr>'}).join('');
+}
+$('calcBtn').addEventListener('click',render);
+['age','deposit','rate','startYear'].forEach(function(id){$(id).addEventListener('input',render)});
+$('depositRange').addEventListener('input',function(){ $('deposit').value=this.value; render(); });
+$('copyBtn').addEventListener('click',function(){
+  if(!lastResult) return;
+  var txt='LittleNest SSY Plan: Maturity '+LittleNestLib.formatINR(lastResult.maturityValue)+' in '+lastResult.maturityYear+' at daughter age '+lastResult.maturityAge+'. Deposited '+LittleNestLib.formatINR(lastResult.totalDeposited)+', interest '+LittleNestLib.formatINR(lastResult.totalInterest)+'. Education withdrawal estimate at 18: '+LittleNestLib.formatINR(lastResult.educationEligible)+'.';
+  if(navigator.clipboard) navigator.clipboard.writeText(txt);
+  $('copied').classList.remove('hidden');
+});
+render();
+</script>
+</body>
+</html>
